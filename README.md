@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DS Visualiser
+
+A modern, high-fidelity algorithm visualization dashboard built with Next.js App Router, React 19, TypeScript, and Tailwind CSS v4.
+
+The project currently includes:
+
+- A landing dashboard page for algorithm exploration
+- A simulation workspace page with controls, chart area, and live code panel
+- A comparison engine page for side-by-side algorithm performance visualization
+
+## Tech Stack
+
+- Next.js 16.2.1 (App Router)
+- React 19.2.4
+- TypeScript 5
+- Tailwind CSS 4
+- ESLint 9 with eslint-config-next
+- next/font (Google fonts: Manrope + Sora)
+
+## Routes
+
+- / : Landing dashboard
+- /simulation : Simulation workspace UI
+- /comparison : Comparison engine UI
+
+## Project Structure
+
+```text
+app/
+	components/
+		dashboard/
+			ConsoleShell.tsx
+			ConsoleSidebar.tsx
+			Header.tsx
+			PageContent.tsx
+			Sidebar.tsx
+			TopHeader.tsx
+		pages/
+			ComparisonEngine.tsx
+			SimulationWorkspace.tsx
+	comparison/
+		page.tsx
+	simulation/
+		page.tsx
+	globals.css
+	layout.tsx
+	page.tsx
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm 10+
+
+### Installation
+
+```bash
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- npm run dev: Start local development server
+- npm run build: Create production build
+- npm run start: Run production server
+- npm run lint: Run ESLint
 
-## Learn More
+## UI Architecture
 
-To learn more about Next.js, take a look at the following resources:
+- app/page.tsx renders the landing dashboard using Header + Sidebar + PageContent.
+- app/simulation/page.tsx and app/comparison/page.tsx use a shared ConsoleShell for consistent chrome.
+- Feature-level content blocks are isolated in app/components/pages for maintainability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Styling Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tailwind CSS v4 is used via app/globals.css.
+- Typography is managed through next/font in app/layout.tsx.
+- The visual system emphasizes dark gradients, neon-accent highlights, and dense information panels.
 
-## Deploy on Vercel
+## Quality Checks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Recommended validation before pushing changes:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+```
+
+## Deployment
+
+The app can be deployed on any platform that supports Next.js.
+
+Typical production flow:
+
+1. npm run build
+2. npm run start
+
+For managed deployment, Vercel is the most straightforward option for Next.js projects.
+
+## Contributing
+
+1. Create a feature branch.
+2. Keep components focused and reusable.
+3. Follow existing naming and folder conventions.
+4. Run lint and build checks locally.
+5. Open a pull request with a concise summary of UI and structural changes.
+
+## License
+
+No license file has been configured yet. Add a LICENSE file if you plan to open-source this project.
