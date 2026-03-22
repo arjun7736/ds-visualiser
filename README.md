@@ -117,4 +117,4 @@ For managed deployment, Vercel is the most straightforward option for Next.js pr
 
 ## License
 
-No license file has been configured yet. Add a LICENSE file if you plan to open-source this project.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
