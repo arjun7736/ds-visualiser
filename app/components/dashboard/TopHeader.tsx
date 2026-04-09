@@ -10,7 +10,7 @@ const navItems: Array<{ key: TopHeaderProps["activeNav"]; label: string; href: s
 
 export function TopHeader({ activeNav = "algorithms" }: TopHeaderProps) {
   return (
-    <header className="flex h-13 items-center border-b border-[#1f2651] px-4 lg:px-5">
+    <header className="sticky top-0 z-20 flex h-13 items-center border-b border-[#1f2651] px-4 lg:px-5">
       <p className="font-heading text-[34px] font-semibold tracking-[-0.03em] text-[#d8deff] sm:text-[16px]">
         Synthetix Console
       </p>

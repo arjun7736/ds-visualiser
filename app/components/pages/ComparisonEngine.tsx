@@ -19,7 +19,7 @@ function AlgoGraph({ bars, accent }: { bars: number[]; accent: string }) {
 
 export function ComparisonEngine() {
   return (
-    <section className="flex h-full min-h-0 flex-col bg-[#0c1134]">
+    <section className="flex flex-col bg-[#0c1134] min-h-full">
       <div className="flex items-center justify-between border-b border-[#20295a] px-4 py-3">
         <div>
           <h1 className="text-[15px] font-semibold text-[#dde2ff]">Comparison Engine</h1>

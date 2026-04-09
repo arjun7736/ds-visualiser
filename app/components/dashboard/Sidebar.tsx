@@ -4,7 +4,7 @@ type SidebarProps = {
 
 export function Sidebar({ items }: SidebarProps) {
   return (
-    <aside className="hidden w-83 shrink-0 border-r border-[#1a2158] bg-[linear-gradient(180deg,#080d34_0%,#070a2d_100%)] lg:flex lg:flex-col">
+    <aside className="sticky top-0 z-10 hidden w-83 shrink-0 border-r border-[#1a2158] bg-[linear-gradient(180deg,#080d34_0%,#070a2d_100%)] overflow-y-auto max-h-[calc(100vh-5.75rem)] lg:flex lg:flex-col">
       <nav className="mt-10 space-y-2 px-5">
         {items.map((item) => (
           <a

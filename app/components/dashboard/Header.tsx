@@ -1,6 +1,6 @@
 export function Header() {
   return (
-    <header className="flex h-23 items-center border-b border-[#1a2158] px-6 sm:px-8">
+    <header className="sticky top-0 z-20 flex h-23 items-center border-b border-[#1a2158] px-6 sm:px-8">
       <div className="flex min-w-63.75 items-center">
         <p className="font-heading text-[22px] font-semibold leading-none tracking-[-0.02em] text-[#dde2ff]">
           Synthetix Console

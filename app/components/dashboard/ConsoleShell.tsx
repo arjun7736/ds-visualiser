@@ -15,9 +15,9 @@ export function ConsoleShell({ activeNav, sidebarItems, children }: ConsoleShell
       <div className="relative mx-auto flex min-h-screen w-full max-w-490 p-1.5">
         <div className="flex w-full flex-col overflow-hidden rounded-xl border border-[#2a335f] bg-[#070b2a] shadow-[0_20px_80px_rgba(4,6,20,0.8)]">
           <TopHeader activeNav={activeNav} />
-          <div className="flex min-h-0 flex-1">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
             <ConsoleSidebar items={sidebarItems} />
-            <div className="min-w-0 flex-1">{children}</div>
+            <div className="min-w-0 flex-1 overflow-y-auto max-h-[calc(100vh-3.25rem)]">{children}</div>
           </div>
         </div>
       </div>

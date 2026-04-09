@@ -18,7 +18,7 @@ function SidebarIcon({ active }: { active?: boolean }) {
 
 export function ConsoleSidebar({ items }: ConsoleSidebarProps) {
   return (
-    <aside className="hidden w-40 shrink-0 border-r border-[#1f2651] bg-[#0a0f35] lg:flex lg:flex-col">
+    <aside className="sticky top-0 z-10 hidden w-40 shrink-0 border-r border-[#1f2651] bg-[#0a0f35] overflow-y-auto max-h-[calc(100vh-3.25rem)] lg:flex lg:flex-col">
       <div className="px-3.5 pt-3.5">
         <div className="flex items-center gap-2.5 rounded-md bg-[#141b56] px-2.5 py-2">
           <span className="grid h-7 w-7 place-items-center rounded-md bg-[#7a88ff] text-[#12194a]">

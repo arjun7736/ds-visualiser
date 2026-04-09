@@ -12,7 +12,7 @@ type PageContentProps = {
 
 export function PageContent({ categoryCards }: PageContentProps) {
   return (
-    <main className="min-w-0 flex-1 w-full p-4 sm:p-6">
+    <main className="min-w-0 flex-1 w-full p-4 sm:p-6 overflow-y-auto max-h-[calc(100vh-5.75rem)]">
       <section className="min-w-0 w-full space-y-4">
         <article className="relative overflow-hidden rounded-2xl border border-[#1d2460] bg-[linear-gradient(115deg,#0b1040_0%,#0b1144_50%,#290f66_100%)] p-6 sm:p-8">
           <div className="pointer-events-none absolute -right-10 -top-16 h-60 w-60 rounded-full bg-[#5d25d5]/35 blur-3xl" />
