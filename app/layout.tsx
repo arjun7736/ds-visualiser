@@ -13,7 +13,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Synthetic Console",
+  title: "DS Visualiser",
   description: "Data structures and algorithms visualization dashboard",
 };
 
