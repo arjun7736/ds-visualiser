@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type IconProps = {
   className?: string;
 };
@@ -27,7 +29,7 @@ export default function Header() {
   return (
     <header className="border-y border-cyan-400/15 bg-[linear-gradient(180deg,#060A18_0%,#050714_100%)] shadow-[inset_0_1px_0_rgba(80,210,255,0.06)]">
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-3 px-4 py-3 md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-7">
-        <h1 className="font-heading text-[clamp(1.2rem,2.7vw,1.5rem)] font-semibold tracking-tight text-cyan-400">
+        <h1 className="ds-title text-cyan-400">
           OBSIDIANALGO
         </h1>
 
@@ -42,7 +44,7 @@ export default function Header() {
           <div className="flex h-14 items-center rounded-sm border border-cyan-300/20 bg-[#02040C] px-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] transition focus-within:border-cyan-300/50 focus-within:shadow-[inset_0_0_0_1px_rgba(94,245,255,0.2)]">
             <SearchIcon className="mr-3 h-7 w-7 text-indigo-200/55" />
             <input
-              className="w-full bg-transparent text-xl text-indigo-100/80 placeholder:text-indigo-200/45 focus:outline-none"
+              className="ds-body w-full bg-transparent text-indigo-100/80 placeholder:text-indigo-200/45 focus:outline-none"
               id="algorithm-search"
               name="q"
               placeholder="Search algorithms..."
@@ -50,6 +52,27 @@ export default function Header() {
             />
           </div>
         </form>
+
+        <nav className="flex items-center gap-2 md:order-2">
+          <Link
+            className="ds-button inline-flex h-11 items-center justify-center rounded-md border border-cyan-300/35 bg-cyan-400/10 px-3 uppercase tracking-[0.14em] text-cyan-300 transition hover:bg-cyan-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 md:px-4"
+            href="/simulation"
+          >
+            Live Panel
+          </Link>
+          <Link
+            className="ds-button inline-flex h-11 items-center justify-center rounded-md border border-cyan-300/35 bg-cyan-400/10 px-3 uppercase tracking-[0.14em] text-cyan-300 transition hover:bg-cyan-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 md:px-4"
+            href="/sorting"
+          >
+            Sort Studio
+          </Link>
+          <Link
+            className="ds-button inline-flex h-11 items-center justify-center rounded-md border border-cyan-300/35 bg-cyan-400/10 px-3 uppercase tracking-[0.14em] text-cyan-300 transition hover:bg-cyan-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 md:px-4"
+            href="/comparison"
+          >
+            Compare Lab
+          </Link>
+        </nav>
       </div>
     </header>
   );

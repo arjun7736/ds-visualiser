@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function ArrowRightIcon() {
   return (
     <svg
@@ -25,11 +27,11 @@ export default function HeroSection() {
 
       <div className="relative mx-auto grid min-h-[calc(100vh-96px)] w-full max-w-[1700px] items-center gap-10 px-5 py-12 md:grid-cols-[1fr_1.05fr] md:gap-14 md:px-8 md:py-18">
         <div className="max-w-[760px]">
-          <p className="inline-flex border border-cyan-400/30 bg-cyan-400/8 px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          <p className="ds-label inline-flex border border-cyan-400/30 bg-cyan-400/8 px-3.5 py-1.5 font-mono text-cyan-300">
             v2.0 ENGINE NOW LIVE
           </p>
 
-          <h2 className="mt-6 font-heading text-[clamp(2.1rem,4.9vw,4.25rem)] font-extrabold leading-[0.98] tracking-[-0.025em] text-slate-100">
+          <h2 className="ds-display mt-6 text-slate-100">
             Master Algorithms
             <br />
             with{" "}
@@ -40,23 +42,23 @@ export default function HeroSection() {
             </span>
           </h2>
 
-          <p className="mt-6 max-w-[710px] text-[clamp(1rem,1.35vw,1.28rem)] leading-relaxed text-slate-300/82">
+          <p className="ds-body mt-6 max-w-[710px] text-slate-300/82">
             Deep-dive into data structures through a surgical, high-fidelity
             lens. Build, trace, and debug complex logic with custom data inputs
             in real-time.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button
-              className="inline-flex min-h-14 items-center gap-2.5 border border-cyan-300/40 bg-cyan-400 px-7 py-3 text-base font-bold tracking-tight text-[#08343D] transition hover:bg-cyan-300 md:text-lg"
-              type="button"
+            <Link
+              className="ds-button inline-flex min-h-14 items-center gap-2.5 border border-cyan-300/40 bg-cyan-400 px-7 py-3 tracking-tight text-[#08343D] transition hover:bg-cyan-300"
+              href="/algorithms/sorting"
             >
               Start Visualizing
               <ArrowRightIcon />
-            </button>
+            </Link>
 
             <button
-              className="inline-flex min-h-14 items-center border border-cyan-200/35 bg-cyan-500/5 px-7 py-3 text-base font-semibold tracking-tight text-slate-100 transition hover:bg-cyan-300/10 md:text-lg"
+              className="ds-button inline-flex min-h-14 items-center border border-cyan-200/35 bg-cyan-500/5 px-7 py-3 tracking-tight text-slate-100 transition hover:bg-cyan-300/10"
               type="button"
             >
               View Documentation
@@ -72,14 +74,14 @@ export default function HeroSection() {
             </div>
 
             <div className="absolute inset-x-[23%] top-[33%] rounded-[2.15rem] border border-slate-300/70 bg-white px-7 py-8 text-slate-700 shadow-[0_16px_30px_rgba(0,0,0,0.08)] md:px-10">
-              <p className="text-[clamp(0.9rem,1vw,1.15rem)] font-semibold tracking-[0.08em] text-slate-700/95">
+              <p className="ds-body font-semibold tracking-[0.08em] text-slate-700/95">
                 SOFTWARE
               </p>
-              <p className="mt-2 text-[clamp(0.9rem,1vw,1.15rem)] font-semibold tracking-[0.08em] text-slate-700/95">
+              <p className="ds-body mt-2 font-semibold tracking-[0.08em] text-slate-700/95">
                 VISUALZER; MOUB.
               </p>
               <div className="mt-4 h-[3px] w-12 bg-cyan-300/80" />
-              <p className="mt-3 text-[clamp(0.68rem,0.82vw,0.9rem)] font-semibold tracking-[0.12em] text-slate-700/85">
+              <p className="ds-small mt-3 font-semibold tracking-[0.12em] text-slate-700/85">
                 SAFE YOUR WORK:
               </p>
             </div>

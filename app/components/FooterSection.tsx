@@ -117,10 +117,10 @@ export default function FooterSection() {
       <div className="relative mx-auto w-full max-w-[1700px] px-5 pt-12 md:px-8 md:pt-14">
         <div className="grid gap-10 pb-12 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:gap-10 md:pb-14">
           <section className="max-w-[490px]">
-            <h4 className="font-heading text-[clamp(1.55rem,2vw,2.05rem)] font-semibold tracking-tight text-cyan-400">
+            <h4 className="ds-title text-cyan-400">
               AlgoVision
             </h4>
-            <p className="mt-4 text-[clamp(0.95rem,1.04vw,1.08rem)] leading-relaxed text-slate-400">
+            <p className="ds-body mt-4 text-slate-400">
               The ultimate platform for algorithm visualization and data
               structure mastery.
             </p>
@@ -139,14 +139,14 @@ export default function FooterSection() {
 
           {FOOTER_COLUMNS.map((column) => (
             <section key={column.title}>
-              <h5 className="font-heading text-[clamp(1.1rem,1.3vw,1.4rem)] font-semibold text-slate-100">
+              <h5 className="ds-subtitle font-heading text-slate-100">
                 {column.title}
               </h5>
               <ul className="mt-5 space-y-3">
                 {column.links.map((link) => (
                   <li key={link}>
                     <a
-                      className="text-[clamp(1rem,1.03vw,1.12rem)] text-slate-400 transition hover:text-cyan-300"
+                      className="ds-body text-slate-400 transition hover:text-cyan-300"
                       href="#"
                     >
                       {link}
@@ -160,7 +160,7 @@ export default function FooterSection() {
       </div>
 
       <div className="relative border-t border-cyan-100/10 px-5 py-7 md:px-8 md:py-8">
-        <p className="text-center text-[clamp(0.92rem,1vw,1.05rem)] text-slate-500">
+        <p className="ds-small text-center text-slate-500">
           © 2024 AlgoVision. Built for high-velocity engineering.
         </p>
       </div>

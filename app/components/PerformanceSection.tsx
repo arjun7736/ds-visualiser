@@ -107,10 +107,10 @@ export default function PerformanceSection() {
 
       <div className="relative mx-auto w-full max-w-[1700px] px-5 py-14 md:px-8 md:py-18">
         <header className="mx-auto max-w-4xl text-center">
-          <h3 className="font-heading text-[clamp(1.9rem,3.8vw,3rem)] font-semibold tracking-tight text-slate-100">
+          <h3 className="ds-display text-slate-100">
             Engineered for Performance
           </h3>
-          <p className="mx-auto mt-3 max-w-3xl text-[clamp(0.98rem,1.15vw,1.2rem)] text-slate-300/72">
+          <p className="ds-body mx-auto mt-3 max-w-3xl text-slate-300/72">
             Precision tools for modern software engineers who demand clarity in
             complexity.
           </p>
@@ -123,10 +123,10 @@ export default function PerformanceSection() {
             <div className="grid items-center gap-8 lg:grid-cols-[1.25fr_1fr]">
               <div>
                 <RealtimeIcon className="h-8 w-8 text-cyan-400" />
-                <h4 className="mt-5 font-heading text-[clamp(1.4rem,2.2vw,1.95rem)] font-semibold tracking-tight text-slate-100">
+                <h4 className="ds-title mt-5 text-slate-100">
                   Real-time Visualization
                 </h4>
-                <p className="mt-3 max-w-[52ch] text-[clamp(0.96rem,1.08vw,1.15rem)] leading-relaxed text-slate-300/76">
+                <p className="ds-body mt-3 max-w-[52ch] text-slate-300/76">
                   Watch your logic unfold stroke-by-stroke. Our rendering engine
                   processes step-throughs at 60fps for seamless transitions.
                 </p>
@@ -149,10 +149,10 @@ export default function PerformanceSection() {
 
           <article className={CARD_CLASS}>
             <InputIcon className="h-8 w-8 text-cyan-400" />
-            <h4 className="mt-5 font-heading text-[clamp(1.4rem,2.1vw,1.9rem)] font-semibold tracking-tight text-slate-100">
+            <h4 className="ds-title mt-5 text-slate-100">
               Custom Input
             </h4>
-            <p className="mt-3 text-[clamp(0.96rem,1.08vw,1.12rem)] leading-relaxed text-slate-300/76">
+            <p className="ds-body mt-3 text-slate-300/76">
               Inject JSON, CSV, or raw binary streams to test edge cases in
               minutes, not hours.
             </p>
@@ -160,10 +160,10 @@ export default function PerformanceSection() {
 
           <article className={CARD_CLASS}>
             <CompareIcon className="h-8 w-8 text-cyan-400" />
-            <h4 className="mt-5 font-heading text-[clamp(1.4rem,2.1vw,1.9rem)] font-semibold tracking-tight text-slate-100">
+            <h4 className="ds-title mt-5 text-slate-100">
               Comparison
             </h4>
-            <p className="mt-3 text-[clamp(0.96rem,1.08vw,1.12rem)] leading-relaxed text-slate-300/76">
+            <p className="ds-body mt-3 text-slate-300/76">
               Benchmarking two solutions side-by-side with real-time complexity
               analysis.
             </p>
@@ -173,17 +173,17 @@ export default function PerformanceSection() {
             <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
               <div>
                 <CodeIcon className="h-8 w-8 text-cyan-400" />
-                <h4 className="mt-5 font-heading text-[clamp(1.4rem,2.1vw,1.9rem)] font-semibold tracking-tight text-slate-100">
+                <h4 className="ds-title mt-5 text-slate-100">
                   Multi-language Code
                 </h4>
-                <p className="mt-3 max-w-[52ch] text-[clamp(0.96rem,1.08vw,1.12rem)] leading-relaxed text-slate-300/76">
+                <p className="ds-body mt-3 max-w-[52ch] text-slate-300/76">
                   Native support for Python, C++, Go, and Rust. View
                   assembly-level traces for deep optimization.
                 </p>
               </div>
 
               <div className="rounded-lg border border-cyan-100/12 bg-[#070C1A] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
-                <pre className="overflow-x-auto font-mono text-[clamp(0.88rem,0.98vw,1.02rem)] leading-relaxed text-cyan-300">
+                <pre className="ds-small overflow-x-auto font-mono text-cyan-300">
                   <code>
                     <span className="text-cyan-300">func </span>
                     <span className="text-cyan-200">main</span>
