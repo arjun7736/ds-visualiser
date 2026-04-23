@@ -101,7 +101,7 @@ function SocialButton({ label, children }: SocialButtonProps) {
   return (
     <button
       aria-label={label}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-md text-slate-400 transition hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-400 transition hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40"
       type="button"
     >
       {children}
@@ -111,42 +111,42 @@ function SocialButton({ label, children }: SocialButtonProps) {
 
 export default function FooterSection() {
   return (
-    <footer className="relative overflow-hidden border-x border-cyan-400/20 bg-[#02050f]">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#02050f_0%,#020516_100%)]" />
+    <footer className="relative overflow-hidden border-x border-cyan-400/20 bg-[#030712]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#030712_0%,#020610_100%)]" />
 
-      <div className="relative mx-auto w-full max-w-[1700px] px-5 pt-14 md:px-8 md:pt-16">
-        <div className="grid gap-12 pb-14 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:gap-10 md:pb-16">
+      <div className="relative mx-auto w-full max-w-[1700px] px-5 pt-12 md:px-8 md:pt-14">
+        <div className="grid gap-10 pb-12 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:gap-10 md:pb-14">
           <section className="max-w-[490px]">
-            <h4 className="font-heading text-[clamp(1.8rem,2.2vw,2.5rem)] font-semibold tracking-tight text-cyan-400">
+            <h4 className="font-heading text-[clamp(1.55rem,2vw,2.05rem)] font-semibold tracking-tight text-cyan-400">
               AlgoVision
             </h4>
-            <p className="mt-4 text-[clamp(1rem,1.2vw,1.45rem)] leading-relaxed text-slate-400">
+            <p className="mt-4 text-[clamp(0.95rem,1.04vw,1.08rem)] leading-relaxed text-slate-400">
               The ultimate platform for algorithm visualization and data
               structure mastery.
             </p>
             <div className="mt-5 flex items-center">
               <SocialButton label="Terminal">
-                <TerminalIcon className="h-7 w-7" />
+                <TerminalIcon className="h-6 w-6" />
               </SocialButton>
               <SocialButton label="Global community">
-                <GlobeIcon className="h-7 w-7" />
+                <GlobeIcon className="h-6 w-6" />
               </SocialButton>
               <SocialButton label="Network">
-                <NetworkIcon className="h-7 w-7" />
+                <NetworkIcon className="h-6 w-6" />
               </SocialButton>
             </div>
           </section>
 
           {FOOTER_COLUMNS.map((column) => (
             <section key={column.title}>
-              <h5 className="font-heading text-[clamp(1.4rem,1.8vw,2rem)] font-semibold text-slate-100">
+              <h5 className="font-heading text-[clamp(1.1rem,1.3vw,1.4rem)] font-semibold text-slate-100">
                 {column.title}
               </h5>
               <ul className="mt-5 space-y-3">
                 {column.links.map((link) => (
                   <li key={link}>
                     <a
-                      className="text-[clamp(1.2rem,1.45vw,1.8rem)] text-slate-400 transition hover:text-cyan-300"
+                      className="text-[clamp(1rem,1.03vw,1.12rem)] text-slate-400 transition hover:text-cyan-300"
                       href="#"
                     >
                       {link}
@@ -159,8 +159,8 @@ export default function FooterSection() {
         </div>
       </div>
 
-      <div className="relative border-t border-cyan-100/10 px-5 py-8 md:px-8 md:py-10">
-        <p className="text-center text-[clamp(1.1rem,1.35vw,1.7rem)] text-slate-500">
+      <div className="relative border-t border-cyan-100/10 px-5 py-7 md:px-8 md:py-8">
+        <p className="text-center text-[clamp(0.92rem,1vw,1.05rem)] text-slate-500">
           © 2024 AlgoVision. Built for high-velocity engineering.
         </p>
       </div>
