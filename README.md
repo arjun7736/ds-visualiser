@@ -22,26 +22,28 @@ The project currently includes:
 - / : Landing dashboard
 - /simulation : Simulation workspace UI
 - /comparison : Comparison engine UI
+- /sorting : Sorting algorithms visualization
+- /algorithms/sorting : Additional sorting visualizer routing
 
 ## Project Structure
 
 ```text
 app/
-	components/
-		dashboard/
-			ConsoleShell.tsx
-			ConsoleSidebar.tsx
-			Header.tsx
-			PageContent.tsx
-			Sidebar.tsx
-			TopHeader.tsx
-		pages/
-			ComparisonEngine.tsx
-			SimulationWorkspace.tsx
+	algorithms/
+		sorting/
+			page.tsx
 	comparison/
 		page.tsx
+	components/
+		FooterSection.tsx
+		Header.tsx
+		HeroSection.tsx
+		PerformanceSection.tsx
 	simulation/
 		page.tsx
+	sorting/
+		page.tsx
+	favicon.ico
 	globals.css
 	layout.tsx
 	page.tsx
@@ -77,9 +79,9 @@ Open http://localhost:3000 in your browser.
 
 ## UI Architecture
 
-- app/page.tsx renders the landing dashboard using Header + Sidebar + PageContent.
-- app/simulation/page.tsx and app/comparison/page.tsx use a shared ConsoleShell for consistent chrome.
-- Feature-level content blocks are isolated in app/components/pages for maintainability.
+- app/page.tsx renders the landing dashboard using Header, HeroSection, PerformanceSection, and FooterSection.
+- app/simulation/page.tsx and app/comparison/page.tsx contain standalone layouts customized for their respective workflows.
+- Reusable UI blocks are maintained within app/components/ for the dashboard.
 
 ## Styling Notes
 

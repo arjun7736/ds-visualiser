@@ -102,7 +102,7 @@ const CARD_CLASS =
 
 export default function PerformanceSection() {
   return (
-    <section className="relative overflow-hidden border-x border-cyan-400/20 bg-[#030712]">
+    <section className="relative overflow-hidden  bg-[#030712]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(9,233,255,0.07),transparent_40%),linear-gradient(180deg,#030712_0%,#020611_100%)]" />
 
       <div className="relative mx-auto w-full max-w-[1700px] px-5 py-14 md:px-8 md:py-18">

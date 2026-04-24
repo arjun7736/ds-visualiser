@@ -29,8 +29,10 @@ export default function Header() {
   return (
     <header className="border-y border-cyan-400/15 bg-[linear-gradient(180deg,#060A18_0%,#050714_100%)] shadow-[inset_0_1px_0_rgba(80,210,255,0.06)]">
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-3 px-4 py-3 md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-7">
-        <h1 className="ds-title text-cyan-400">
+        <h1 className="ds-title text-cyan-400 hover:scale-105 transition-transform">
+          <Link href="/"> 
           OBSIDIANALGO
+          </Link>
         </h1>
 
         <form
@@ -41,7 +43,7 @@ export default function Header() {
           <label className="sr-only" htmlFor="algorithm-search">
             Search algorithms
           </label>
-          <div className="flex h-14 items-center rounded-sm border border-cyan-300/20 bg-[#02040C] px-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] transition focus-within:border-cyan-300/50 focus-within:shadow-[inset_0_0_0_1px_rgba(94,245,255,0.2)]">
+          <div className="flex h-14 items-center border border-cyan-300/20 bg-[#02040C] px-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] transition focus-within:border-cyan-300/50 focus-within:shadow-[inset_0_0_0_1px_rgba(94,245,255,0.2)] rounded-xl">
             <SearchIcon className="mr-3 h-7 w-7 text-indigo-200/55" />
             <input
               className="ds-body w-full bg-transparent text-indigo-100/80 placeholder:text-indigo-200/45 focus:outline-none"

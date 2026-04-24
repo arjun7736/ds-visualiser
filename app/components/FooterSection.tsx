@@ -111,7 +111,7 @@ function SocialButton({ label, children }: SocialButtonProps) {
 
 export default function FooterSection() {
   return (
-    <footer className="relative overflow-hidden border-x border-cyan-400/20 bg-[#030712]">
+    <footer className="relative overflow-hidden  bg-[#030712]">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#030712_0%,#020610_100%)]" />
 
       <div className="relative mx-auto w-full max-w-[1700px] px-5 pt-12 md:px-8 md:pt-14">

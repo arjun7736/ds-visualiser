@@ -22,15 +22,11 @@ function ArrowRightIcon() {
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden border-x border-cyan-400/20 bg-[#030712]">
+    <section className="relative overflow-hidden bg-[#030712]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_42%,rgba(15,228,255,0.1),transparent_45%),linear-gradient(90deg,#030611_0%,#02050d_40%,#081223_100%)]" />
 
       <div className="relative mx-auto grid min-h-[calc(100vh-96px)] w-full max-w-[1700px] items-center gap-10 px-5 py-12 md:grid-cols-[1fr_1.05fr] md:gap-14 md:px-8 md:py-18">
         <div className="max-w-[760px]">
-          <p className="ds-label inline-flex border border-cyan-400/30 bg-cyan-400/8 px-3.5 py-1.5 font-mono text-cyan-300">
-            v2.0 ENGINE NOW LIVE
-          </p>
-
           <h2 className="ds-display mt-6 text-slate-100">
             Master Algorithms
             <br />
@@ -50,7 +46,7 @@ export default function HeroSection() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              className="ds-button inline-flex min-h-14 items-center gap-2.5 border border-cyan-300/40 bg-cyan-400 px-7 py-3 tracking-tight text-[#08343D] transition hover:bg-cyan-300"
+              className="ds-button inline-flex min-h-14 items-center gap-2.5 border border-cyan-300/40 bg-cyan-400 px-7 py-3 tracking-tight text-[#08343D] transition hover:bg-cyan-300 rounded-xl hover:scale-105"
               href="/algorithms/sorting"
             >
               Start Visualizing
@@ -58,7 +54,7 @@ export default function HeroSection() {
             </Link>
 
             <button
-              className="ds-button inline-flex min-h-14 items-center border border-cyan-200/35 bg-cyan-500/5 px-7 py-3 tracking-tight text-slate-100 transition hover:bg-cyan-300/10"
+              className="ds-button inline-flex min-h-14 items-center border border-cyan-200/35 bg-cyan-500/5 px-7 py-3 tracking-tight text-slate-100 transition hover:bg-cyan-300/10 rounded-xl hover:scale-105 "
               type="button"
             >
               View Documentation

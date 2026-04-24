@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -27,6 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${manrope.variable} ${sora.variable} h-full antialiased`}
     >
+      <Header />
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
