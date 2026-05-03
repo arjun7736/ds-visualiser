@@ -31,7 +31,7 @@ export default function Header() {
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-3 px-4 py-3 md:grid-cols-[auto_1fr_auto] md:gap-8 md:px-7">
         <h1 className="ds-title text-cyan-400 hover:scale-105 transition-transform">
           <Link href="/"> 
-          OBSIDIANALGO
+          AlgoVision
           </Link>
         </h1>
 

@@ -53,12 +53,6 @@ export default function HeroSection() {
               <ArrowRightIcon />
             </Link>
 
-            <button
-              className="ds-button inline-flex min-h-14 items-center border border-cyan-200/35 bg-cyan-500/5 px-7 py-3 tracking-tight text-slate-100 transition hover:bg-cyan-300/10 rounded-xl hover:scale-105 "
-              type="button"
-            >
-              View Documentation
-            </button>
           </div>
         </div>
 

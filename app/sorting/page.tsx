@@ -180,40 +180,40 @@ function PseudoLine({ number, code, active }: PseudoLineProps) {
 export default function SortingPage() {
   return (
     <main className="min-h-screen border-x border-cyan-300/20 bg-[#020612] text-slate-100">
-      <section className="mx-auto w-full max-w-[1920px] p-4 md:p-6">
-        <div className="rounded-xl border border-cyan-100/10 bg-[#060C19]/95 p-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)] md:p-5">
-          <div className="grid gap-4 border-b border-cyan-100/10 pb-4 md:grid-cols-[1.1fr_auto_1fr_auto] md:items-center md:gap-6 md:pb-5">
+      <section className="mx-auto w-full max-w-[1920px] p-2 md:p-4 xl:p-2">
+        <div className="rounded-xl border border-cyan-100/10 bg-[#060C19]/95 p-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)] md:p-4">
+          <div className="grid gap-3 border-b border-cyan-100/10 pb-3 md:grid-cols-[1.1fr_auto_1fr_auto] md:items-center md:gap-4 md:pb-4">
             <div className="flex flex-wrap items-center gap-3">
-              <div className="min-w-[180px] rounded-lg border border-cyan-100/10 bg-[#0A1220] px-4 py-2.5">
+              <div className="min-w-[160px] rounded-lg border border-cyan-100/10 bg-[#0A1220] px-3 py-2">
                 <p className="ds-label text-slate-500">
                   Algorithm
                 </p>
-                <p className="ds-title mt-1 flex items-center gap-2 text-slate-100">
+                <p className="ds-title flex items-center gap-2 text-slate-100">
                   QuickSort
                   <span className="text-cyan-300">⌄</span>
                 </p>
               </div>
               <button
-                className="grid h-14 w-14 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-400 text-[#073B45] transition hover:bg-cyan-300"
+                className="grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-400 text-[#073B45] transition hover:bg-cyan-300"
                 type="button"
               >
-                <PlayIcon className="h-6 w-6" />
+                <PlayIcon className="h-5 w-5 md:h-6 md:w-6" />
               </button>
               <button
-                className="grid h-14 w-14 place-items-center rounded-xl border border-slate-500/35 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/30"
+                className="grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-xl border border-slate-500/35 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/30"
                 type="button"
               >
-                <StepIcon className="h-5 w-5" />
+                <StepIcon className="h-4 w-4 md:h-5 md:w-5" />
               </button>
             </div>
 
             <div className="hidden h-10 w-px bg-cyan-100/10 md:block" />
 
-            <div className="max-w-[340px] rounded-lg border border-cyan-100/10 bg-[#0A1220] px-4 py-3">
+            <div className="max-w-[300px] rounded-lg border border-cyan-100/10 bg-[#0A1220] px-3 py-2">
               <p className="ds-label text-slate-500">
                 Visualization Speed
               </p>
-              <div className="mt-2 flex items-center gap-3">
+              <div className="mt-1 flex items-center gap-3">
                 <span className="ds-small text-slate-500">1x</span>
                 <div className="h-1.5 flex-1 rounded-full bg-slate-700">
                   <div className="h-full w-3/4 rounded-full bg-cyan-400" />
@@ -222,15 +222,15 @@ export default function SortingPage() {
               </div>
             </div>
 
-            <div className="ds-button inline-flex h-14 items-center rounded-lg border border-cyan-300/25 bg-cyan-400/7 px-5 uppercase tracking-[0.12em] text-cyan-300">
+            <div className="ds-button inline-flex h-10 md:h-12 items-center rounded-lg border border-cyan-300/25 bg-cyan-400/7 px-4 uppercase tracking-[0.12em] text-cyan-300">
               <span className="mr-2 text-cyan-300">●</span>
               Live Status: Running
             </div>
           </div>
 
-          <div className="mt-4 grid gap-4 xl:grid-cols-[1.6fr_1fr]">
-            <div className="space-y-4">
-              <section className="rounded-xl border border-cyan-100/10 bg-[#070E1C] p-4 md:p-5">
+          <div className="mt-3 grid gap-3 md:grid-cols-[1.6fr_1fr] lg:grid-cols-[1.8fr_1fr]">
+            <div className="space-y-3">
+              <section className="rounded-xl border border-cyan-100/10 bg-[#070E1C] p-3 md:p-4">
                 <div className="ds-label flex flex-wrap items-center gap-5 text-slate-300">
                   <span className="inline-flex items-center gap-2">
                     <span className="h-3 w-3 rounded-sm bg-cyan-400" />
@@ -246,39 +246,39 @@ export default function SortingPage() {
                   </span>
                 </div>
 
-                <div className="mt-6 flex h-[520px] items-end gap-1.5 rounded-lg border border-cyan-100/6 bg-[#050A16] px-4 pb-6 pt-3">
+                <div className="mt-4 flex h-[250px] xl:h-[320px] items-end gap-1.5 rounded-lg border border-cyan-100/6 bg-[#050A16] px-3 pb-4 pt-2">
                   {SORT_BARS.map((bar, index) => (
                     <Bar key={`${bar.value}-${index}`} tone={bar.tone} value={bar.value} />
                   ))}
                 </div>
               </section>
 
-              <section className="rounded-xl border border-cyan-100/10 bg-[#070E1C] p-4 md:p-5">
+              <section className="rounded-xl border border-cyan-100/10 bg-[#070E1C] p-3 md:p-4">
                 <p className="ds-label text-slate-500">
                   Custom Input (CSV)
                 </p>
-                <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_220px]">
-                  <div className="ds-body rounded-lg border border-cyan-100/10 bg-[#050A16] p-4 text-slate-400">
+                <div className="mt-2 grid gap-2 md:grid-cols-[1fr_160px] lg:grid-cols-[1fr_220px]">
+                  <div className="ds-body rounded-lg border border-cyan-100/10 bg-[#050A16] p-3 text-slate-400">
                     45, 23, 89, 12, 56, 77, 34, 90, 11, 67, 3, 54, 88...
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <button
-                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-100/15 bg-[#111827] px-3 py-3 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
+                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-100/15 bg-[#111827] px-3 py-2 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
                       type="button"
                     >
                       <DiceIcon className="h-4 w-4" />
                       Generate Random
                     </button>
                     <button
-                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-100/15 bg-[#111827] px-3 py-3 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
+                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-100/15 bg-[#111827] px-3 py-2 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
                       type="button"
                     >
                       <ShuffleIcon className="h-4 w-4" />
                       Shuffle Current
                     </button>
                     <button
-                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-300/35 bg-cyan-400 px-3 py-3 uppercase tracking-[0.12em] text-[#063C45] transition hover:bg-cyan-300"
+                      className="ds-button flex w-full items-center justify-center gap-2 rounded border border-cyan-300/35 bg-cyan-400 px-3 py-2 uppercase tracking-[0.12em] text-[#063C45] transition hover:bg-cyan-300"
                       type="button"
                     >
                       <CheckIcon className="h-4 w-4 text-[#063C45]" />
@@ -292,26 +292,26 @@ export default function SortingPage() {
             <aside className="rounded-xl border border-cyan-100/10 bg-[#070E1C] p-0">
               <div className="flex items-center border-b border-cyan-100/10">
                 <button
-                  className="ds-button border-r border-cyan-100/10 px-5 py-3 uppercase tracking-[0.12em] text-cyan-300"
+                  className="ds-button border-r border-cyan-100/10 px-4 py-2 md:px-5 md:py-3 uppercase tracking-[0.12em] text-cyan-300"
                   type="button"
                 >
                   Pseudocode
                 </button>
                 <button
-                  className="ds-button border-r border-cyan-100/10 px-5 py-3 uppercase tracking-[0.12em] text-slate-500"
+                  className="ds-button border-r border-cyan-100/10 px-4 py-2 md:px-5 md:py-3 uppercase tracking-[0.12em] text-slate-500"
                   type="button"
                 >
                   Explanation
                 </button>
                 <button
-                  className="ds-button px-5 py-3 uppercase tracking-[0.12em] text-slate-500"
+                  className="ds-button px-4 py-2 md:px-5 md:py-3 uppercase tracking-[0.12em] text-slate-500"
                   type="button"
                 >
                   Complexity
                 </button>
               </div>
 
-              <ol className="ds-body mt-2 space-y-0.5 px-2 pb-5 font-mono">
+              <ol className="ds-body mt-2 space-y-0.5 px-2 pb-3 md:pb-4 font-mono max-h-[180px] xl:max-h-[220px] overflow-y-auto">
                 {PSEUDOCODE_LINES.map((line) => (
                   <PseudoLine
                     active={line.active}
@@ -322,11 +322,11 @@ export default function SortingPage() {
                 ))}
               </ol>
 
-              <div className="mx-4 border-t border-cyan-100/10 pt-4">
+              <div className="mx-3 md:mx-4 border-t border-cyan-100/10 pt-3">
                 <p className="ds-label text-slate-500">
                   Current Metrics
                 </p>
-                <div className="mt-3 grid grid-cols-2 gap-3">
+                <div className="mt-2 grid grid-cols-2 gap-2 md:gap-3">
                   <div className="rounded border border-cyan-100/12 bg-[#111827] p-3">
                     <p className="ds-label text-slate-500">
                       Comparisons
@@ -340,7 +340,7 @@ export default function SortingPage() {
                 </div>
               </div>
 
-              <div className="mx-4 mt-5 rounded border border-cyan-100/12 bg-[#111827] p-4">
+              <div className="mx-3 md:mx-4 mt-3 md:mt-4 rounded border border-cyan-100/12 bg-[#111827] p-3 md:p-4">
                 <p className="ds-title uppercase tracking-[0.08em] text-slate-100">
                   Complexity Analysis
                 </p>
@@ -360,7 +360,7 @@ export default function SortingPage() {
                 </div>
               </div>
 
-              <div className="m-4 mt-5 rounded border border-cyan-300/35 bg-[#061423] px-4 py-3">
+              <div className="m-3 md:m-4 mt-3 md:mt-4 rounded border border-cyan-300/35 bg-[#061423] px-3 py-2 md:px-4 md:py-3">
                 <p className="ds-label text-cyan-300">
                   [SYSTEM] Swapping indices 4 (value: 56) and 9 (value: 11)
                 </p>

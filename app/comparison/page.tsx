@@ -167,7 +167,7 @@ function SeriesBars({
   highlightClass: string;
 }) {
   return (
-    <div className="flex h-[700px] items-end gap-1.5 rounded-lg border border-cyan-100/8 bg-[#040916] px-5 pb-6 pt-4">
+    <div className="flex h-[250px] xl:h-[350px] items-end gap-1.5 rounded-lg border border-cyan-100/8 bg-[#040916] px-3 pb-4 pt-2">
       {series.map((bar, idx) => (
         <span
           className={`w-full rounded-t-sm ${
@@ -213,9 +213,9 @@ function StatRow({
 export default function ComparisonPage() {
   return (
     <main className="min-h-screen border-x border-cyan-300/20 bg-[#020612] text-slate-100">
-      <section className="mx-auto w-full max-w-[1920px] p-4 md:p-6">
-        <div className="rounded-xl border border-cyan-100/10 bg-[#060c19]/95 p-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)] md:p-5">
-          <header className="flex flex-wrap items-end justify-between gap-4 border-b border-cyan-100/10 pb-4">
+      <section className="mx-auto w-full max-w-[1920px] p-2 md:p-4 xl:p-2">
+        <div className="rounded-xl border border-cyan-100/10 bg-[#060c19]/95 p-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)] md:p-4">
+          <header className="flex flex-wrap items-end justify-between gap-3 border-b border-cyan-100/10 pb-3">
             <div>
               <h1 className="ds-display text-slate-100">
                 Advanced Comparison
@@ -236,8 +236,8 @@ export default function ComparisonPage() {
             </div>
           </header>
 
-          <div className="mt-4 grid gap-4 xl:grid-cols-[1fr_1fr_1fr]">
-            <article className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-4">
+          <div className="mt-3 grid gap-3 md:grid-cols-3">
+            <article className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-3 md:p-4">
               <div className="flex items-center justify-between">
                 <p className="ds-title uppercase tracking-[0.1em] text-slate-200">
                   <span className="mr-2 text-cyan-300">●</span>
@@ -256,8 +256,8 @@ export default function ComparisonPage() {
               </div>
             </article>
 
-            <article className="space-y-4">
-              <section className="rounded-xl border border-cyan-100/10 bg-[radial-gradient(circle_at_50%_20%,rgba(34,211,238,0.16),rgba(22,30,47,0.95)_48%)] px-6 py-8 text-center">
+            <article className="space-y-3">
+              <section className="rounded-xl border border-cyan-100/10 bg-[radial-gradient(circle_at_50%_20%,rgba(34,211,238,0.16),rgba(22,30,47,0.95)_48%)] px-4 py-6 text-center">
                 <p className="ds-subtitle uppercase tracking-[0.08em] text-slate-400">
                   Efficiency Gap
                 </p>
@@ -269,7 +269,7 @@ export default function ComparisonPage() {
                 </p>
               </section>
 
-              <section className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-4">
+              <section className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-3 md:p-4">
                 <div className="flex items-center justify-between">
                   <h2 className="ds-title uppercase tracking-[0.1em] text-slate-200">
                     Live Telemetry
@@ -302,7 +302,7 @@ export default function ComparisonPage() {
               </section>
             </article>
 
-            <article className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-4">
+            <article className="rounded-xl border border-cyan-100/10 bg-[#090f1d] p-3 md:p-4">
               <div className="flex items-center justify-between">
                 <p className="ds-title uppercase tracking-[0.1em] text-slate-200">
                   <span className="mr-2 text-violet-300">●</span>
@@ -322,31 +322,31 @@ export default function ComparisonPage() {
             </article>
           </div>
 
-          <footer className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-cyan-100/10 bg-[#0a1120] p-3 md:gap-5">
+          <footer className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-cyan-100/10 bg-[#0a1120] p-3 md:gap-5">
             <div className="flex items-center gap-2">
               <button
-                className="grid h-11 w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
+                className="grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
                 type="button"
               >
-                <RewindIcon className="h-5 w-5" />
+                <RewindIcon className="h-4 w-4 md:h-5 md:w-5" />
               </button>
               <button
-                className="grid h-14 w-14 place-items-center rounded-xl border border-cyan-300/40 bg-cyan-200 text-[#073943] transition hover:bg-cyan-100"
+                className="grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-xl border border-cyan-300/40 bg-cyan-200 text-[#073943] transition hover:bg-cyan-100"
                 type="button"
               >
-                <PlayIcon className="h-6 w-6" />
+                <PlayIcon className="h-5 w-5 md:h-6 md:w-6" />
               </button>
               <button
-                className="grid h-11 w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
+                className="grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
                 type="button"
               >
-                <StepIcon className="h-4.5 w-4.5" />
+                <StepIcon className="h-4 w-4 md:h-5 md:w-5" />
               </button>
               <button
-                className="ml-1 grid h-11 w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
+                className="ml-1 grid h-10 w-10 md:h-11 md:w-11 place-items-center rounded-md border border-cyan-100/15 bg-slate-700/20 text-slate-300 transition hover:bg-slate-700/35"
                 type="button"
               >
-                <RefreshIcon className="h-5 w-5" />
+                <RefreshIcon className="h-4 w-4 md:h-5 md:w-5" />
               </button>
             </div>
 
@@ -378,24 +378,24 @@ export default function ComparisonPage() {
 
             <div className="ml-auto flex items-center gap-2">
               <button
-                className="ds-button flex h-14 items-center gap-2 rounded-md border border-cyan-100/15 bg-[#171e2d] px-4 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
+                className="ds-button flex h-10 md:h-12 items-center gap-2 rounded-md border border-cyan-100/15 bg-[#171e2d] px-4 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
                 type="button"
               >
-                <ShareIcon className="h-4.5 w-4.5" />
+                <ShareIcon className="h-4 w-4" />
                 Share Report
               </button>
               <button
-                className="ds-button flex h-14 items-center gap-2 rounded-md border border-cyan-100/15 bg-[#171e2d] px-4 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
+                className="ds-button flex h-10 md:h-12 items-center gap-2 rounded-md border border-cyan-100/15 bg-[#171e2d] px-4 uppercase tracking-[0.12em] text-slate-300 transition hover:bg-slate-700/30"
                 type="button"
               >
-                <DownloadIcon className="h-4.5 w-4.5" />
+                <DownloadIcon className="h-4 w-4" />
                 Export Data
               </button>
               <button
-                className="grid h-14 w-14 place-items-center rounded-xl border border-cyan-300/40 bg-cyan-400 text-[#073A44] transition hover:bg-cyan-300"
+                className="grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-xl border border-cyan-300/40 bg-cyan-400 text-[#073A44] transition hover:bg-cyan-300"
                 type="button"
               >
-                <FlaskIcon className="h-5 w-5" />
+                <FlaskIcon className="h-4 w-4 md:h-5 md:w-5" />
               </button>
             </div>
           </footer>

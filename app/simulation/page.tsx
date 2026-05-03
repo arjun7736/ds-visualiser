@@ -92,8 +92,8 @@ function TreeNode({ value, top, left, active, muted, label }: TreeNodeProps) {
 export default function SimulationPage() {
   return (
     <main className="min-h-screen border-x border-cyan-300/20 bg-[#020612] text-slate-100">
-      <div className="mx-auto grid w-full max-w-[1900px] xl:grid-cols-[300px_1fr_340px]">
-        <aside className="border-b border-cyan-100/10 bg-[#030916] p-4 xl:border-b-0 xl:border-r">
+      <div className="mx-auto grid w-full max-w-[1900px] md:grid-cols-[200px_1fr_240px] lg:grid-cols-[250px_1fr_300px] xl:grid-cols-[300px_1fr_340px]">
+        <aside className="border-b border-cyan-100/10 bg-[#030916] p-3 md:p-4 md:border-b-0 md:border-r">
           <div className="flex items-center justify-between">
             <h1 className="ds-title text-slate-100">
               Input Panel
@@ -184,8 +184,8 @@ export default function SimulationPage() {
           </div>
         </aside>
 
-        <section className="flex min-h-[760px] flex-col border-b border-cyan-100/10 bg-[#0A101D] xl:border-b-0 xl:border-r">
-          <div className="flex flex-wrap items-center gap-2 border-b border-cyan-100/10 p-4">
+        <section className="flex min-h-[400px] md:min-h-[500px] xl:min-h-[760px] flex-col border-b border-cyan-100/10 bg-[#0A101D] md:border-b-0 md:border-r">
+          <div className="flex flex-wrap items-center gap-2 border-b border-cyan-100/10 p-3 md:p-4">
             <span className="ds-label inline-flex items-center rounded border border-cyan-300/25 bg-cyan-300/8 px-3 py-1 text-cyan-300">
               Live Simulation
             </span>
@@ -312,9 +312,9 @@ export default function SimulationPage() {
           </div>
         </section>
 
-        <aside className="bg-[#030916] p-4 xl:p-5">
-          <div className="flex items-center gap-3">
-            <InfoIcon className="h-6 w-6 text-cyan-300" />
+        <aside className="bg-[#030916] p-3 md:p-4 xl:p-5">
+          <div className="flex items-center gap-2 md:gap-3">
+            <InfoIcon className="h-5 w-5 md:h-6 md:w-6 text-cyan-300" />
             <h2 className="ds-title text-slate-100">
               Explanation
             </h2>
