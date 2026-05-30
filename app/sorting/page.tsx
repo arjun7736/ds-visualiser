@@ -1,16 +1,18 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 
 import {
   createRandomArray,
   DEFAULT_SORT_ARRAY,
   filterInput,
   generateSortingSteps,
+  PSEUDOCODE_LANGUAGES,
   shuffleArray,
   SORTING_ALGORITHMS,
   SORTING_ALGORITHMS_BY_ID,
   type BarState,
+  type PseudocodeLanguage,
   type SortingAlgorithmId,
   type SortingStep,
 } from "../components/sortingAlgorithms";
@@ -166,16 +168,38 @@ function PseudoLine({ number, code, active }: PseudoLineProps) {
   );
 }
 
-export default function SortingPage() {
-  const [algorithm, setAlgorithm] = useState<SortingAlgorithmId>("quick");
+const normalizeAlgorithmParam = (
+  value: string | string[] | undefined,
+): SortingAlgorithmId | null => {
+  if (!value) return null;
+  const requested = Array.isArray(value) ? value[0] : value;
+  const normalized = requested.trim().toLowerCase();
+  const matched = SORTING_ALGORITHMS.find((item) => item.id === normalized);
+  return matched?.id ?? null;
+};
+
+type SortingPageProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export default function SortingPage({ searchParams }: SortingPageProps) {
+  const resolvedSearchParams = use(searchParams);
+  const queryAlgorithm = normalizeAlgorithmParam(resolvedSearchParams.algorithm);
+
+  const [manualAlgorithm, setManualAlgorithm] = useState<SortingAlgorithmId | null>(
+    null,
+  );
   const [arrayValues, setArrayValues] = useState<number[]>(DEFAULT_SORT_ARRAY);
   const [csvInput, setCsvInput] = useState<string>(DEFAULT_SORT_ARRAY.join(", "));
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(600);
+  const [pseudocodeLanguage, setPseudocodeLanguage] =
+    useState<PseudocodeLanguage>("javascript");
   const [activeTab, setActiveTab] = useState<"pseudocode" | "explanation" | "complexity">("pseudocode");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const algorithm = manualAlgorithm ?? queryAlgorithm ?? "quick";
   const selectedAlgorithm = SORTING_ALGORITHMS_BY_ID[algorithm];
   const steps = useMemo(
     () => generateSortingSteps(algorithm, arrayValues),
@@ -258,7 +282,7 @@ export default function SortingPage() {
                         className="px-4 py-2.5 text-sm hover:bg-cyan-400/10 transition text-slate-200"
                         key={item.id}
                         onClick={() => {
-                          setAlgorithm(item.id);
+                          setManualAlgorithm(item.id);
                           setCurrentStepIndex(0);
                           setIsPlaying(false);
                           setShowDropdown(false);
@@ -403,16 +427,34 @@ export default function SortingPage() {
 
               <div className="flex-1 overflow-y-auto mt-2 pr-1 custom-scrollbar min-h-[220px]">
                 {activeTab === "pseudocode" && (
-                  <ol className="ds-body space-y-0.5 px-2 pb-3 font-mono">
-                    {selectedAlgorithm.code.map((line) => (
-                      <PseudoLine
-                        active={line.number === String(currentStep.highlightedLine).padStart(2, "0")}
-                        code={line.code}
-                        key={line.number}
-                        number={line.number}
-                      />
-                    ))}
-                  </ol>
+                  <div>
+                    <div className="flex items-center justify-between px-3 pb-3">
+                      <p className="ds-label text-slate-500">Pseudocode Language</p>
+                      <select
+                        className="rounded border border-cyan-100/15 bg-[#050A16] px-2.5 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-300"
+                        onChange={(event) =>
+                          setPseudocodeLanguage(event.target.value as PseudocodeLanguage)
+                        }
+                        value={pseudocodeLanguage}
+                      >
+                        {PSEUDOCODE_LANGUAGES.map((language) => (
+                          <option key={language.id} value={language.id}>
+                            {language.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <ol className="ds-body space-y-0.5 px-2 pb-3 font-mono">
+                      {selectedAlgorithm.codeByLanguage[pseudocodeLanguage].map((line) => (
+                        <PseudoLine
+                          active={line.number === String(currentStep.highlightedLine).padStart(2, "0")}
+                          code={line.code}
+                          key={`${pseudocodeLanguage}-${line.number}`}
+                          number={line.number}
+                        />
+                      ))}
+                    </ol>
+                  </div>
                 )}
 
                 {activeTab === "explanation" && (

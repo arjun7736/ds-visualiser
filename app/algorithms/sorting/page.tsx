@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import type { SortingAlgorithmId } from "../../components/sortingAlgorithms";
 
 type SortingAlgorithm = {
   name: string;
   family: "Comparison-Based" | "Non-Comparison";
+  sortStudioId?: SortingAlgorithmId;
   best: string;
   average: string;
   worst: string;
@@ -17,6 +19,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Bubble Sort",
     family: "Comparison-Based",
+    sortStudioId: "bubble",
     best: "O(n)",
     average: "O(n²)",
     worst: "O(n²)",
@@ -28,6 +31,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Selection Sort",
     family: "Comparison-Based",
+    sortStudioId: "selection",
     best: "O(n²)",
     average: "O(n²)",
     worst: "O(n²)",
@@ -39,6 +43,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Insertion Sort",
     family: "Comparison-Based",
+    sortStudioId: "insertion",
     best: "O(n)",
     average: "O(n²)",
     worst: "O(n²)",
@@ -50,6 +55,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Merge Sort",
     family: "Comparison-Based",
+    sortStudioId: "merge",
     best: "O(n log n)",
     average: "O(n log n)",
     worst: "O(n log n)",
@@ -61,6 +67,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Quick Sort",
     family: "Comparison-Based",
+    sortStudioId: "quick",
     best: "O(n log n)",
     average: "O(n log n)",
     worst: "O(n²)",
@@ -72,6 +79,7 @@ const SORTING_ALGORITHMS: SortingAlgorithm[] = [
   {
     name: "Heap Sort",
     family: "Comparison-Based",
+    sortStudioId: "heap",
     best: "O(n log n)",
     average: "O(n log n)",
     worst: "O(n log n)",
@@ -168,7 +176,8 @@ function InfoPill({ children }: { children: ReactNode }) {
 }
 
 function AlgorithmCard({ algorithm }: { algorithm: SortingAlgorithm }) {
-  return (
+  const isStudioSupported = Boolean(algorithm.sortStudioId);
+  const cardContent = (
     <article className="rounded-xl border border-cyan-100/10 bg-[linear-gradient(125deg,rgba(8,14,28,0.95)_0%,rgba(4,9,20,0.96)_100%)] p-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02)]">
       <div className="flex items-start justify-between gap-3">
         <h3 className="ds-title text-slate-100">{algorithm.name}</h3>
@@ -214,7 +223,30 @@ function AlgorithmCard({ algorithm }: { algorithm: SortingAlgorithm }) {
       </div>
 
       <p className="ds-body mt-3 text-slate-400">{algorithm.note}</p>
+
+      <div className="mt-4">
+        {isStudioSupported ? (
+          <span className="ds-button inline-flex h-10 items-center rounded-md border border-cyan-300/35 bg-cyan-400/12 px-3 text-cyan-300">
+            Open In Sort Studio
+          </span>
+        ) : (
+          <span className="ds-label inline-flex rounded border border-cyan-100/12 bg-[#0E1727] px-2.5 py-1 text-slate-500">
+            Sort Studio support coming soon
+          </span>
+        )}
+      </div>
     </article>
+  );
+
+  if (!isStudioSupported) return cardContent;
+
+  return (
+    <Link
+      className="block transition-transform hover:-translate-y-0.5"
+      href={`/sorting?algorithm=${algorithm.sortStudioId}`}
+    >
+      {cardContent}
+    </Link>
   );
 }
 
