@@ -183,7 +183,7 @@ function generateBSTSimulation(values: number[]): SimulationStep[] {
 
     if (!root) {
       root = { value: val, leftNode: null, rightNode: null, x: 50, y: 12, depth: 1 };
-      nodes.push({ id: `node-${val}`, value: val, top: 12, left: 50, active: true, label: "NEW" });
+      nodes.push({ id: `node-${i}`, value: val, top: 12, left: 50, active: true, label: "NEW" });
       logs.push({ message: `Tree root initialized: ${val}`, type: "success" });
       pushStep(
         nodes, edges,
@@ -223,8 +223,8 @@ function generateBSTSimulation(values: number[]): SimulationStep[] {
             curr.leftNode = { value: val, leftNode: null, rightNode: null, x: newX, y: newY, depth: depth + 1 };
 
             nodes = nodes.map(n => ({ ...n, active: false, label: undefined }));
-            nodes.push({ id: `node-${val}`, value: val, top: newY, left: newX, active: true, label: "NEW" });
-            edges.push({ id: `edge-${curr.value}-${val}`, x1: curr.x, y1: curr.y, x2: newX, y2: newY });
+            nodes.push({ id: `node-${i}`, value: val, top: newY, left: newX, active: true, label: "NEW" });
+            edges.push({ id: `edge-${i}-L`, x1: curr.x, y1: curr.y, x2: newX, y2: newY });
 
             logs.push({ message: `Inserted node: ${val} (Left)`, type: "success" });
 
@@ -256,8 +256,8 @@ function generateBSTSimulation(values: number[]): SimulationStep[] {
             curr.rightNode = { value: val, leftNode: null, rightNode: null, x: newX, y: newY, depth: depth + 1 };
 
             nodes = nodes.map(n => ({ ...n, active: false, label: undefined }));
-            nodes.push({ id: `node-${val}`, value: val, top: newY, left: newX, active: true, label: "NEW" });
-            edges.push({ id: `edge-${curr.value}-${val}`, x1: curr.x, y1: curr.y, x2: newX, y2: newY });
+            nodes.push({ id: `node-${i}`, value: val, top: newY, left: newX, active: true, label: "NEW" });
+            edges.push({ id: `edge-${i}-R`, x1: curr.x, y1: curr.y, x2: newX, y2: newY });
 
             logs.push({ message: `Inserted node: ${val} (Right)`, type: "success" });
 

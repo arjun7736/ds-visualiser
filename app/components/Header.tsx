@@ -64,6 +64,12 @@ export default function Header() {
           </Link>
           <Link
             className="ds-button inline-flex h-11 items-center justify-center rounded-md border border-cyan-300/35 bg-cyan-400/10 px-3 uppercase tracking-[0.14em] text-cyan-300 transition hover:bg-cyan-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 md:px-4"
+            href="/search"
+          >
+            Search Studio
+          </Link>
+          <Link
+            className="ds-button inline-flex h-11 items-center justify-center rounded-md border border-cyan-300/35 bg-cyan-400/10 px-3 uppercase tracking-[0.14em] text-cyan-300 transition hover:bg-cyan-300/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 md:px-4"
             href="/sorting"
           >
             Sort Studio
