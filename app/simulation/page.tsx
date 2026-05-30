@@ -1,3 +1,7 @@
+"use client"
+
+import { useState } from "react";
+
 type TreeNodeProps = {
   value: string;
   top: string;
@@ -6,6 +10,19 @@ type TreeNodeProps = {
   muted?: boolean;
   label?: string;
 };
+
+const createArray = (size: number =10) => {
+  const arr = [];
+  for (let i = 0; i < size; i++) {
+    arr.push(Math.floor(Math.random() * 100));
+  }
+  return arr;
+}
+
+const filterInput = (input:string) => {
+  const arr = input.split(",").map((num:string) => Number(num.trim())).filter((num:number) => !isNaN(num) && num >= 0);
+  return arr;
+}
 
 function InfoIcon({ className = "" }: { className?: string }) {
   return (
@@ -90,10 +107,14 @@ function TreeNode({ value, top, left, active, muted, label }: TreeNodeProps) {
 }
 
 export default function SimulationPage() {
+
+  const [treeValues, setTreeValues] = useState<number[]>([]);
+console.log(treeValues);
+
   return (
-    <main className="min-h-screen border-x border-cyan-300/20 bg-[#020612] text-slate-100">
-      <div className="mx-auto grid w-full max-w-[1900px] md:grid-cols-[200px_1fr_240px] lg:grid-cols-[250px_1fr_300px] xl:grid-cols-[300px_1fr_340px]">
-        <aside className="border-b border-cyan-100/10 bg-[#030916] p-3 md:p-4 md:border-b-0 md:border-r">
+    <main className="border-x border-cyan-300/20 bg-[#020612] text-slate-100 md:h-[calc(100dvh-5.5rem)] md:overflow-hidden">
+      <div className="mx-auto grid w-full max-w-[1900px] md:h-full md:min-h-0 md:grid-cols-[200px_1fr_240px] lg:grid-cols-[250px_1fr_300px] xl:grid-cols-[300px_1fr_340px]">
+        <aside className="border-b border-cyan-100/10 bg-[#030916] p-3 md:h-full md:min-h-0 md:overflow-y-auto md:border-b-0 md:border-r md:p-4">
           <div className="flex items-center justify-between">
             <h1 className="ds-title text-slate-100">
               Input Panel
@@ -121,30 +142,13 @@ export default function SimulationPage() {
             </button>
           </div>
 
-          <div className="mt-5 rounded-lg border border-cyan-100/10 bg-slate-900/40 p-1">
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                className="ds-button rounded bg-cyan-400 px-3 py-2 tracking-[0.16em] text-[#073B45]"
-                type="button"
-              >
-                Standard
-              </button>
-              <button
-                className="ds-button rounded px-3 py-2 tracking-[0.14em] text-slate-500"
-                type="button"
-              >
-                JSON Toggle
-              </button>
-            </div>
-          </div>
+      
 
           <div className="mt-6">
             <p className="ds-label text-slate-400">
               Node Values
             </p>
-            <div className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-3 text-slate-200">
-              45, 23, 67, 12, 34, 56, 89
-            </div>
+            <input type="text" value={treeValues.join(",")} onChange={(e) => {setTreeValues(filterInput(e.target.value)) }} className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-3 text-slate-200" />
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
@@ -156,7 +160,10 @@ export default function SimulationPage() {
             </button>
             <button
               className="ds-button rounded border border-violet-400/60 bg-violet-400/5 px-3 py-2.5 tracking-[0.2em] text-violet-200"
-              type="button"
+              
+              onClick={() => {
+                setTreeValues(createArray())
+              }}
             >
               RANDOMIZE
             </button>
@@ -184,7 +191,7 @@ export default function SimulationPage() {
           </div>
         </aside>
 
-        <section className="flex min-h-[400px] md:min-h-[500px] xl:min-h-[760px] flex-col border-b border-cyan-100/10 bg-[#0A101D] md:border-b-0 md:border-r">
+        <section className="flex min-h-[420px] flex-col border-b border-cyan-100/10 bg-[#0A101D] md:h-full md:min-h-0 md:border-b-0 md:border-r">
           <div className="flex flex-wrap items-center gap-2 border-b border-cyan-100/10 p-3 md:p-4">
             <span className="ds-label inline-flex items-center rounded border border-cyan-300/25 bg-cyan-300/8 px-3 py-1 text-cyan-300">
               Live Simulation
@@ -194,7 +201,7 @@ export default function SimulationPage() {
             </span>
           </div>
 
-          <div className="relative flex-1 overflow-hidden bg-[linear-gradient(rgba(71,102,145,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(71,102,145,0.1)_1px,transparent_1px)] bg-[size:38px_38px]">
+          <div className="relative min-h-[300px] flex-1 overflow-hidden bg-[linear-gradient(rgba(71,102,145,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(71,102,145,0.1)_1px,transparent_1px)] bg-[size:38px_38px] md:min-h-0">
             <div className="absolute inset-0">
               <svg
                 aria-hidden="true"
@@ -273,7 +280,7 @@ export default function SimulationPage() {
             <TreeNode muted left="75%" top="44%" value="89" />
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 border-t border-cyan-100/10 bg-[#0A111F] p-4">
+          <div className="flex flex-wrap items-center gap-2.5 border-t border-cyan-100/10 bg-[#0A111F] px-3 py-2.5 md:flex-nowrap md:gap-3 md:px-4 md:py-3">
             <button
               className="rounded-md border border-slate-400/35 px-3 py-2 text-slate-300 transition hover:bg-slate-700/20"
               type="button"
@@ -296,7 +303,7 @@ export default function SimulationPage() {
               <span className="sr-only">Forward</span>
             </button>
 
-            <div className="ml-auto flex min-w-[180px] items-center gap-3">
+            <div className="ml-auto flex min-w-[140px] items-center gap-3 md:min-w-[180px]">
               <span className="ds-label text-slate-500">
                 Speed
               </span>
@@ -305,14 +312,14 @@ export default function SimulationPage() {
               </div>
             </div>
 
-            <div className="ml-auto text-right">
+            <div className="text-right">
               <p className="ds-label text-slate-500">Step</p>
               <p className="ds-metric text-cyan-300">04/12</p>
             </div>
           </div>
         </section>
 
-        <aside className="bg-[#030916] p-3 md:p-4 xl:p-5">
+        <aside className="bg-[#030916] p-3 md:h-full md:min-h-0 md:overflow-y-auto md:p-4 xl:p-5">
           <div className="flex items-center gap-2 md:gap-3">
             <InfoIcon className="h-5 w-5 md:h-6 md:w-6 text-cyan-300" />
             <h2 className="ds-title text-slate-100">
@@ -382,7 +389,7 @@ export default function SimulationPage() {
             </span>
             <ArrowRightIcon className="h-6 w-6 text-cyan-300" />
           </button>
-        </aside>
+             </aside>
       </div>
     </main>
   );
