@@ -153,8 +153,7 @@ export default function PerformanceSection() {
               Custom Input
             </h4>
             <p className="ds-body mt-3 text-slate-300/76">
-              Inject JSON, CSV, or raw binary streams to test edge cases in
-              minutes, not hours.
+              Inject Custom values or array to test edge cases in minutes, not hours.
             </p>
           </article>
 
@@ -177,7 +176,7 @@ export default function PerformanceSection() {
                   Multi-language Code
                 </h4>
                 <p className="ds-body mt-3 max-w-[52ch] text-slate-300/76">
-                  Native support for Python, C++, Go, and Rust. View
+                  Native support for Python, C++, Java, and Javascript. View
                   assembly-level traces for deep optimization.
                 </p>
               </div>

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import comparison from "../assets/comparison.png"
 
 function ArrowRightIcon() {
   return (
@@ -57,26 +59,12 @@ export default function HeroSection() {
         </div>
 
         <div className="w-full rounded-2xl border border-cyan-200/10 bg-[#0A1421]/80 p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_28px_80px_rgba(3,6,18,0.7)]">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-slate-300/40 bg-[#f6f7f8]">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg ">
             <div className="absolute right-4 top-3 flex items-center gap-2">
               <span className="h-3.5 w-3.5 rounded-full bg-[#f2c3c3]" />
               <span className="h-3.5 w-3.5 rounded-full bg-[#20d4a4]" />
             </div>
-
-            <div className="absolute inset-x-[23%] top-[33%] rounded-[2.15rem] border border-slate-300/70 bg-white px-7 py-8 text-slate-700 shadow-[0_16px_30px_rgba(0,0,0,0.08)] md:px-10">
-              <p className="ds-body font-semibold tracking-[0.08em] text-slate-700/95">
-                SOFTWARE
-              </p>
-              <p className="ds-body mt-2 font-semibold tracking-[0.08em] text-slate-700/95">
-                VISUALZER; MOUB.
-              </p>
-              <div className="mt-4 h-[3px] w-12 bg-cyan-300/80" />
-              <p className="ds-small mt-3 font-semibold tracking-[0.12em] text-slate-700/85">
-                SAFE YOUR WORK:
-              </p>
-            </div>
-
-            <div className="absolute inset-x-0 bottom-[25%] h-[2px] bg-black/5" />
+            <Image src={comparison} className="w-full h-full object-cover rounded-md" alt="" />
           </div>
         </div>
       </div>
