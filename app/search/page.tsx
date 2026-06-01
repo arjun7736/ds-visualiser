@@ -41,12 +41,12 @@ function PauseIcon({ className = "" }: { className?: string }) {
 }
 
 // Data structures supported
-type DSType = "array" | "bst" | "linkedlist";
-type SearchAlg = "linear" | "binary" | "bst_search";
+type DSType = "array" | "bst" | "linkedlist" | "trie" | "graph";
+type SearchAlg = "linear" | "binary" | "bst_search" | "trie_search" | "graph_search";
 
 type NodeData = {
   id: string;
-  value: number;
+  value: number | string;
   label?: string;
   active?: boolean;
   comparing?: boolean;
@@ -107,7 +107,7 @@ const CODE_SNIPPETS: Record<SearchAlg, CodeLine[]> = {
     { text: "    else high = mid - 1;", indent: 2 },
     { text: "  }", indent: 1 },
     { text: "  return -1;", indent: 1 },
-    { text: "}" },
+    { text: "}", indent: 0 },
   ],
   bst_search: [
     { text: "function searchBST(root, target) {", indent: 0 },
@@ -117,6 +117,30 @@ const CODE_SNIPPETS: Record<SearchAlg, CodeLine[]> = {
     { text: "  } else {", indent: 1 },
     { text: "    return searchBST(root.right, target);", indent: 2 },
     { text: "  }", indent: 1 },
+    { text: "}", indent: 0 }
+  ]
+  ,
+  trie_search: [
+    { text: "function insertTrie(root, word) {", indent: 0 },
+    { text: "  for (let ch of word) {", indent: 1 },
+    { text: "    if (!node[ch]) node[ch] = {};", indent: 2 },
+    { text: "    node = node[ch];", indent: 2 },
+    { text: "  }", indent: 1 },
+    { text: "  node.isWord = true;", indent: 1 },
+    { text: "}", indent: 0 },
+    { text: "function searchTrie(root, word) {", indent: 0 },
+    { text: "  // follow characters, return true if isWord found", indent: 1 },
+    { text: "}", indent: 0 }
+  ],
+  graph_search: [
+    { text: "function bfs(graph, start, target) {", indent: 0 },
+    { text: "  const q = [start]; const visited = new Set([start]);", indent: 1 },
+    { text: "  while (q.length) {", indent: 1 },
+    { text: "    const node = q.shift();", indent: 2 },
+    { text: "    if (node === target) return true;", indent: 2 },
+    { text: "    for (const n of graph[node]) if (!visited.has(n)) { visited.add(n); q.push(n); }", indent: 2 },
+    { text: "  }", indent: 1 },
+    { text: "  return false;", indent: 1 },
     { text: "}", indent: 0 }
   ]
 };
@@ -131,17 +155,18 @@ const createArray = (size: number = 8) => {
 };
 
 const filterInput = (input: string) => {
-  return input
-    .split(",")
-    .map((num) => Number(num.trim()))
-    .filter((num) => !isNaN(num) && num >= 0);
+  const parts = input.split(",").map((p) => p.trim()).filter(Boolean);
+  // If all parts are numeric, return numbers; otherwise return strings
+  const allNumeric = parts.every((p) => /^-?\d+$/.test(p));
+  if (allNumeric) return parts.map((p) => Number(p));
+  return parts;
 };
 
 export default function SearchStudioPage() {
   const [dsType, setDsType] = useState<DSType>("array");
   const [alg, setAlg] = useState<SearchAlg>("linear");
-  const [dsValues, setDsValues] = useState<number[]>([15, 23, 40, 48, 55, 67, 82, 90]);
-  const [searchTarget, setSearchTarget] = useState<number>(48);
+  const [dsValues, setDsValues] = useState<any[]>([15, 23, 40, 48, 55, 67, 82, 90]);
+  const [searchTarget, setSearchTarget] = useState<number | string>(48);
 
   const [steps, setSteps] = useState<SimulationStep[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -158,6 +183,14 @@ export default function SearchStudioPage() {
       setAlg("bst_search");
     } else if (dsType === "linkedlist") {
       setAlg("linear");
+    } else if (dsType === "trie") {
+      setAlg("trie_search");
+      // When switching to trie, default to a set of example words and clear target
+      const sampleWords = ["app","app","cat","car","cat","apple"];
+      setDsValues(sampleWords);
+      setSearchTarget("");
+    } else if (dsType === "graph") {
+      setAlg("graph_search");
     }
     setSteps([]);
     setCurrentStepIndex(0);
@@ -171,17 +204,28 @@ export default function SearchStudioPage() {
 
     let generatedSteps: SimulationStep[] = [];
 
+    // Ensure trie inputs are strings
+    if (dsType === "trie") {
+      const stringValues = dsValues.map((v) => String(v));
+      setDsValues(stringValues);
+      setSearchTarget(String(searchTarget || ""));
+    }
+
     if (dsType === "array" && alg === "linear") {
-      generatedSteps = generateLinearSearch(dsValues, searchTarget);
+      generatedSteps = generateLinearSearch(dsValues, Number(searchTarget));
     } else if (dsType === "array" && alg === "binary") {
       // Binary search requires a sorted array. Auto-sort for premium user experience.
-      const sortedValues = [...dsValues].sort((a, b) => a - b);
+      const sortedValues = [...dsValues].map((v) => Number(v)).sort((a, b) => a - b);
       setDsValues(sortedValues);
-      generatedSteps = generateBinarySearch(sortedValues, searchTarget);
+      generatedSteps = generateBinarySearch(sortedValues, Number(searchTarget));
     } else if (dsType === "bst") {
-      generatedSteps = generateBSTSearch(dsValues, searchTarget);
+      generatedSteps = generateBSTSearch(dsValues, Number(searchTarget));
     } else if (dsType === "linkedlist") {
-      generatedSteps = generateLinkedListSearch(dsValues, searchTarget);
+      generatedSteps = generateLinkedListSearch(dsValues, Number(searchTarget));
+    } else if (dsType === "trie") {
+      generatedSteps = generateTrieSearch(dsValues, String(searchTarget));
+    } else if (dsType === "graph") {
+      generatedSteps = generateGraphSearch(dsValues, Number(searchTarget));
     }
 
     setSteps(generatedSteps);
@@ -824,6 +868,203 @@ export default function SearchStudioPage() {
     return steps;
   };
 
+  // Trie search simulator (shared-prefix trie with simple tree layout)
+  const generateTrieSearch = (words: any[], target: string): SimulationStep[] => {
+    const steps: SimulationStep[] = [];
+    const logs: LogEntry[] = [];
+
+    const normalized = (words || []).map((w) => String(w || "")).filter(Boolean);
+    if (normalized.length === 0) {
+      logs.push({ message: "No words provided for trie.", type: "error" });
+      steps.push({ nodes: [], edges: [], logs: [...logs], highlightedCodeLine: 0, explanation: { title: "No Words", body: "Provide comma-separated words to build the trie." }, properties: [{ label: "Target", value: String(target) }, { label: "Status", value: "Error" }] });
+      return steps;
+    }
+
+    type TNode = {
+      id: string;
+      char: string;
+      children: Map<string, TNode>;
+      isWord: boolean;
+      depth: number;
+      x?: number;
+      y?: number;
+      parent?: TNode | null;
+    };
+
+    let idCounter = 0;
+    const createNode = (ch: string, parent: TNode | null, depth: number): TNode => {
+      return { id: `tnode-${idCounter++}`, char: ch, children: new Map(), isWord: false, depth, parent, x: 0, y: 0 };
+    };
+
+    const root = createNode("", null, 0);
+
+    // Build shared-prefix trie
+    normalized.forEach((w) => {
+      let curr = root;
+      for (const ch of w) {
+        if (!curr.children.has(ch)) {
+          const child = createNode(ch, curr, curr.depth + 1);
+          curr.children.set(ch, child);
+        }
+        curr = curr.children.get(ch)!;
+      }
+      curr.isWord = true;
+    });
+
+    // compute leaf counts
+    const leafCountMap = new Map<TNode, number>();
+    const computeLeaves = (node: TNode): number => {
+      if (node.children.size === 0) {
+        leafCountMap.set(node, 1);
+        return 1;
+      }
+      let sum = 0;
+      node.children.forEach((c) => {
+        sum += computeLeaves(c);
+      });
+      leafCountMap.set(node, sum || 1);
+      return sum || 1;
+    };
+    const totalLeaves = computeLeaves(root);
+
+    // assign x positions based on leaf-order
+    let leafIndex = 0;
+    const assignPositions = (node: TNode) => {
+      if (node.children.size === 0) {
+        leafIndex++;
+        node.x = (leafIndex / totalLeaves) * 100;
+      } else {
+        node.children.forEach((c) => assignPositions(c));
+        // average of children x
+        const xs: number[] = [];
+        node.children.forEach((c) => { if (typeof c.x === 'number') xs.push(c.x); });
+        node.x = xs.reduce((a,b)=>a+b,0) / xs.length;
+      }
+      node.y = 10 + node.depth * 12;
+    };
+    assignPositions(root);
+
+    // collect visualization nodes and edges
+    const vizNodes: NodeData[] = [];
+    const vizEdges: EdgeData[] = [];
+    const traverse = (node: TNode) => {
+      vizNodes.push({ id: node.id, value: node.char || (node === root ? "root" : ""), label: node.char || "", left: node.x, top: node.y, muted: false });
+      node.children.forEach((c) => {
+        vizEdges.push({ id: `edge-${node.id}-${c.id}`, x1: node.x || 0, y1: node.y || 0, x2: c.x || 0, y2: c.y || 0 });
+        traverse(c);
+      });
+    };
+    traverse(root);
+
+    logs.push({ message: `Constructed trie from ${normalized.length} words.`, type: "info" });
+    steps.push({ nodes: vizNodes.map(n => ({ ...n })), edges: vizEdges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 1, explanation: { title: "Trie Constructed", body: `Trie layout created from provided words.` }, properties: [{ label: "Target", value: String(target) }, { label: "Status", value: "Searching" }, { label: "Words", value: String(normalized.length) }] });
+
+    // simulate search along the trie
+    const t = String(target || "");
+    let curr: TNode | undefined = root;
+    const pathNodes: Set<string> = new Set();
+    for (let i = 0; i < t.length; i++) {
+      const ch = t[i];
+      if (!curr) break;
+      const child = curr.children.get(ch);
+      // mark path up to this char
+      if (child) {
+        pathNodes.add(child.id);
+        logs.push({ message: `Following '${ch}' to node ${child.id}`, type: "info" });
+        steps.push({ nodes: vizNodes.map(n => ({ ...n, active: pathNodes.has(n.id), comparing: pathNodes.has(n.id), muted: !pathNodes.has(n.id) })), edges: vizEdges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 2, explanation: { title: `Step ${i+1}: '${ch}'`, body: `Following character '${ch}'` }, properties: [{ label: "Target", value: t }, { label: "Progress", value: `${i+1}/${t.length}` }, { label: "Status", value: "Traversing" }] });
+        curr = child;
+      } else {
+        logs.push({ message: `No child '${ch}' found at this path.`, type: "error" });
+        steps.push({ nodes: vizNodes.map(n => ({ ...n, muted: true })), edges: vizEdges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 3, explanation: { title: "Not Found", body: `No path for character '${ch}'.` }, properties: [{ label: "Target", value: t }, { label: "Status", value: "Not Found" }] });
+        return steps;
+      }
+    }
+
+    if (curr && curr.isWord) {
+      logs.push({ message: `Target '${t}' found in trie.`, type: "success" });
+      steps.push({ nodes: vizNodes.map(n => ({ ...n, found: pathNodes.has(n.id), active: pathNodes.has(n.id), muted: !pathNodes.has(n.id) })), edges: vizEdges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 4, explanation: { title: "Found", body: `Target '${t}' is a stored word.` }, properties: [{ label: "Target", value: t }, { label: "Status", value: "Found" }] });
+    } else {
+      logs.push({ message: `Target '${t}' not present as a full word in trie.`, type: "error" });
+      steps.push({ nodes: vizNodes.map(n => ({ ...n, muted: true })), edges: vizEdges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 3, explanation: { title: "Not Found", body: `Target '${t}' not found as whole word.` }, properties: [{ label: "Target", value: t }, { label: "Status", value: "Not Found" }] });
+    }
+
+    return steps;
+  };
+
+  // Graph search simulator (BFS)
+  const generateGraphSearch = (vals: any[], target: number): SimulationStep[] => {
+    const steps: SimulationStep[] = [];
+    const logs: LogEntry[] = [];
+    const nodes: NodeData[] = [];
+    const edges: EdgeData[] = [];
+    const n = Math.max(1, vals.length);
+
+    // place nodes on circle
+    for (let i = 0; i < n; i++) {
+      const angle = (i / n) * Math.PI * 2;
+      const left = Math.round(50 + Math.cos(angle) * 40);
+      const top = Math.round(30 + Math.sin(angle) * 30);
+      nodes.push({ id: `g-${i}`, value: vals[i], label: String(vals[i]), left, top });
+    }
+
+    // connect sequential and a few random edges
+    for (let i = 0; i < n; i++) {
+      const j = (i + 1) % n;
+      edges.push({ id: `ge-${i}-${j}`, x1: nodes[i].left || 0, y1: nodes[i].top || 0, x2: nodes[j].left || 0, y2: nodes[j].top || 0 });
+      if (Math.random() > 0.6) {
+        const k = Math.floor(Math.random() * n);
+        if (k !== i && k !== j) edges.push({ id: `ge-${i}-${k}`, x1: nodes[i].left || 0, y1: nodes[i].top || 0, x2: nodes[k].left || 0, y2: nodes[k].top || 0, dashed: true });
+      }
+    }
+
+    logs.push({ message: `Graph constructed with ${n} nodes.`, type: "info" });
+    steps.push({ nodes: nodes.map(n => ({ ...n })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 1, explanation: { title: "Graph Constructed", body: `Graph with ${n} nodes.` }, properties: [{ label: "Target", value: target }, { label: "Status", value: "Searching" }] });
+
+    // BFS
+    const adj: Record<number, number[]> = {};
+    for (let i = 0; i < n; i++) adj[i] = [];
+    edges.forEach((e) => {
+      // derive indices from ids
+      const matches = e.id.match(/ge-(\d+)-(\d+)/);
+      if (matches) {
+        const a = Number(matches[1]);
+        const b = Number(matches[2]);
+        adj[a].push(b);
+        adj[b].push(a);
+      }
+    });
+
+    const visited = new Set<number>();
+    const q: number[] = [0];
+    visited.add(0);
+    let comparisons = 0;
+
+    while (q.length) {
+      const cur = q.shift() as number;
+      comparisons++;
+      logs.push({ message: `Visiting node ${cur} (value: ${vals[cur]})`, type: "comparing" });
+      steps.push({ nodes: nodes.map((nd, idx) => ({ ...nd, active: idx === cur, comparing: idx === cur, muted: !visited.has(idx) })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 2, explanation: { title: `Visiting ${cur}`, body: `Checking node ${cur} with value ${vals[cur]}.` }, properties: [{ label: "Comparisons", value: String(comparisons) }, { label: "Status", value: "Comparing" }] });
+
+      if (Number(vals[cur]) === target) {
+        logs.push({ message: `Target found at node ${cur}!`, type: "success" });
+        steps.push({ nodes: nodes.map((nd, idx) => ({ ...nd, found: idx === cur, active: idx === cur, muted: idx !== cur })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 3, explanation: { title: "Found", body: `Target ${target} found at node ${cur}.` }, properties: [{ label: "Target", value: String(target) }, { label: "Status", value: "Found" }] });
+        return steps;
+      }
+
+      for (const nb of adj[cur]) {
+        if (!visited.has(nb)) {
+          visited.add(nb);
+          q.push(nb);
+        }
+      }
+    }
+
+    logs.push({ message: `Target ${target} not found in the graph.`, type: "error" });
+    steps.push({ nodes: nodes.map(n => ({ ...n, muted: true })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 4, explanation: { title: "Complete", body: `Target ${target} not found.` }, properties: [{ label: "Target", value: target }, { label: "Status", value: "Not Found" }] });
+
+    return steps;
+  };
+
   // Playback timers
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -875,20 +1116,18 @@ export default function SearchStudioPage() {
           {/* DS Selector */}
           <div className="mt-5 shrink-0">
             <p className="ds-label text-slate-400">Data Structure</p>
-            <div className="mt-2 grid grid-cols-3 gap-1.5 rounded-lg border border-cyan-100/10 bg-slate-900/40 p-1">
-              {(["array", "bst", "linkedlist"] as DSType[]).map((type) => (
-                <button
-                  key={type}
-                  className={`ds-button rounded px-1.5 py-2 text-xs tracking-wider uppercase transition ${
-                    dsType === type
-                      ? "bg-cyan-400 text-[#073B45]"
-                      : "text-slate-400 hover:bg-cyan-400/5 hover:text-cyan-300"
-                  }`}
-                  onClick={() => setDsType(type)}
-                >
-                  {type === "linkedlist" ? "List" : type}
-                </button>
-              ))}
+            <div className="mt-2">
+              <select
+                value={dsType}
+                onChange={(e) => setDsType(e.target.value as DSType)}
+                className="ds-body mt-2 w-full rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-400"
+              >
+                {(["array", "bst", "linkedlist", "trie", "graph"] as DSType[]).map((type) => (
+                  <option key={type} value={type}>
+                    {type === "linkedlist" ? "List" : type}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -920,7 +1159,13 @@ export default function SearchStudioPage() {
             <input
               type="text"
               value={dsValues.join(", ")}
-              onChange={(e) => setDsValues(filterInput(e.target.value))}
+              onChange={(e) => {
+                if (dsType === "trie") {
+                  setDsValues(e.target.value.split(",").map(s => s.trim()).filter(Boolean));
+                } else {
+                  setDsValues(filterInput(e.target.value));
+                }
+              }}
               className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-2.5 text-slate-200 w-full focus:outline-none focus:border-cyan-400"
             />
           </div>
@@ -928,12 +1173,21 @@ export default function SearchStudioPage() {
           {/* Search Target */}
           <div className="mt-4 shrink-0">
             <p className="ds-label text-slate-400">Search Target</p>
-            <input
-              type="number"
-              value={searchTarget}
-              onChange={(e) => setSearchTarget(parseInt(e.target.value) || 0)}
-              className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-2.5 text-slate-200 w-full focus:outline-none focus:border-cyan-400"
-            />
+            {dsType === "trie" ? (
+              <input
+                type="text"
+                value={String(searchTarget)}
+                onChange={(e) => setSearchTarget(e.target.value)}
+                className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-2.5 text-slate-200 w-full focus:outline-none focus:border-cyan-400"
+              />
+            ) : (
+              <input
+                type="number"
+                value={Number(searchTarget)}
+                onChange={(e) => setSearchTarget(parseInt(e.target.value) || 0)}
+                className="ds-body mt-2 rounded-lg border border-cyan-100/12 bg-[#0A111F] px-4 py-2.5 text-slate-200 w-full focus:outline-none focus:border-cyan-400"
+              />
+            )}
           </div>
 
           {/* Action Buttons */}
@@ -948,7 +1202,19 @@ export default function SearchStudioPage() {
             <button
               className="ds-button rounded border border-violet-400/60 bg-violet-400/5 px-3 py-2.5 tracking-[0.2em] text-violet-200 hover:bg-violet-400/20 transition"
               type="button"
-              onClick={() => setDsValues(createArray(dsType === "linkedlist" ? 6 : dsType === "bst" ? 7 : 8))}
+              onClick={() => {
+                if (dsType === "linkedlist") setDsValues(createArray(6));
+                else if (dsType === "bst") setDsValues(createArray(7));
+                else if (dsType === "trie") {
+                  const sample = ["apple","app","ape","bat","batch","cat","car","card","dog"];
+                  const pick = Array.from({ length: 6 }, (_, i) => sample[Math.floor(Math.random() * sample.length)]);
+                  setDsValues(pick);
+                } else if (dsType === "graph") {
+                  setDsValues(createArray(6));
+                } else {
+                  setDsValues(createArray(8));
+                }
+              }}
             >
               RANDOMIZE
             </button>
@@ -1024,7 +1290,7 @@ export default function SearchStudioPage() {
             </div>
 
             {/* Arrays & Linked Lists Horizontal Visualizer Container */}
-            {dsType !== "bst" && (
+            {(dsType === "array" || dsType === "linkedlist") && (
               <div className="w-full max-w-5xl px-8 flex items-center justify-center gap-4 relative py-12">
                 {currentStep.nodes.map((node, index) => {
                   const isLinkedList = dsType === "linkedlist";
@@ -1065,8 +1331,8 @@ export default function SearchStudioPage() {
               </div>
             )}
 
-            {/* Tree Specific Rendering */}
-            {dsType === "bst" && (
+            {/* Tree / Absolute-position Rendering (BST, Graph, Trie) */}
+            {(dsType === "bst" || dsType === "graph" || dsType === "trie") && (
               <div className="absolute inset-0">
                 {currentStep.nodes.map(node => {
                   let activeStyle = false;
