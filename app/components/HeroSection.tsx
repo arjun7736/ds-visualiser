@@ -64,7 +64,7 @@ export default function HeroSection() {
               <span className="h-3.5 w-3.5 rounded-full bg-[#f2c3c3]" />
               <span className="h-3.5 w-3.5 rounded-full bg-[#20d4a4]" />
             </div>
-            <Image src={comparison} className="w-full h-full object-cover rounded-md" alt="" />
+            <Image loading="eager" src={comparison} className="w-full h-full object-cover rounded-md" alt="" />
           </div>
         </div>
       </div>
