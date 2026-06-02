@@ -137,7 +137,7 @@ export default function FooterSection() {
             </div>
           </section>
 
-          {FOOTER_COLUMNS.map((column) => (
+          {/* {FOOTER_COLUMNS.map((column) => (
             <section key={column.title}>
               <h5 className="ds-subtitle font-heading text-slate-100">
                 {column.title}
@@ -155,13 +155,13 @@ export default function FooterSection() {
                 ))}
               </ul>
             </section>
-          ))}
+          ))} */} 
         </div>
       </div>
 
       <div className="relative border-t border-cyan-100/10 px-5 py-7 md:px-8 md:py-8">
         <p className="ds-small text-center text-slate-500">
-          © 2024 AlgoVision. Built for high-velocity engineering.
+          © 2026 AlgoVision. Built for high-velocity engineering.
         </p>
       </div>
     </footer>

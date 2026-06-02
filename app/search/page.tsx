@@ -66,6 +66,16 @@ type EdgeData = {
   dashed?: boolean;
 };
 
+type BSTNode = {
+  value: number;
+  leftNode: BSTNode | null;
+  rightNode: BSTNode | null;
+  x: number;
+  y: number;
+  depth: number;
+  id: string;
+};
+
 type LogEntry = {
   message: string;
   type: "success" | "info" | "comparing" | "error";
@@ -527,16 +537,6 @@ export default function SearchStudioPage() {
     const steps: SimulationStep[] = [];
     const logs: LogEntry[] = [];
 
-    type BSTNode = {
-      value: number;
-      leftNode: BSTNode | null;
-      rightNode: BSTNode | null;
-      x: number;
-      y: number;
-      depth: number;
-      id: string;
-    };
-
     // First build the BST
     let rootNode: BSTNode | null = null;
     const treeNodes: NodeData[] = [];
@@ -547,7 +547,7 @@ export default function SearchStudioPage() {
         rootNode = { value: val, leftNode: null, rightNode: null, x: 50, y: 12, depth: 1, id: `node-${idx}` };
         treeNodes.push({ id: `node-${idx}`, value: val, top: 12, left: 50 });
       } else {
-        let curr = rootNode;
+        let curr: any = rootNode;
         let depth = 1;
         let dx = 20;
         while (true) {
@@ -589,15 +589,17 @@ export default function SearchStudioPage() {
     logs.push({ message: `Searching for target: ${target}`, type: "info" });
 
     let comparisons = 0;
-    let curr: BSTNode | null = rootNode;
+    let curr: any = rootNode;
+    const rootValue = rootNode ? String((rootNode as any).value) : "unknown";
+    const rootId = rootNode ? (rootNode as any).id : undefined;
 
     // Initial root search step
     steps.push({
-      nodes: treeNodes.map(n => ({ ...n, active: n.id === curr?.id })),
+      nodes: treeNodes.map(n => ({ ...n, active: n.id === rootId })),
       edges: treeEdges.map(e => ({ ...e })),
       logs: [...logs],
       highlightedCodeLine: 2,
-      explanation: { title: "Start Search", body: `Starting search at BST root node (value: ${curr?.value}).` },
+      explanation: { title: "Start Search", body: `Starting search at BST root node (value: ${rootValue}).` },
       properties: [
         { label: "Target", value: target.toString() },
         { label: "Comparisons", value: "0" },
@@ -611,8 +613,9 @@ export default function SearchStudioPage() {
     while (curr) {
       comparisons++;
       const currentId = curr.id;
+      const currentValue = curr.value;
 
-      logs.push({ message: `Comparing BST node value ${curr.value} with target ${target}`, type: "comparing" });
+      logs.push({ message: `Comparing BST node value ${currentValue} with target ${target}`, type: "comparing" });
       steps.push({
         nodes: treeNodes.map(n => ({
           ...n,
@@ -625,7 +628,7 @@ export default function SearchStudioPage() {
         highlightedCodeLine: 2,
         explanation: {
           title: `Step ${comparisons}: Compare`,
-          body: <span>Comparing node <span className="text-cyan-300">{curr.value}</span> with target <span className="text-cyan-300">{target}</span>.</span>
+          body: <span>Comparing node <span className="text-cyan-300">{currentValue}</span> with target <span className="text-cyan-300">{target}</span>.</span>
         },
         properties: [
           { label: "Target", value: target.toString() },
@@ -1018,7 +1021,7 @@ export default function SearchStudioPage() {
     }
 
     logs.push({ message: `Graph constructed with ${n} nodes.`, type: "info" });
-    steps.push({ nodes: nodes.map(n => ({ ...n })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 1, explanation: { title: "Graph Constructed", body: `Graph with ${n} nodes.` }, properties: [{ label: "Target", value: target }, { label: "Status", value: "Searching" }] });
+    steps.push({ nodes: nodes.map(n => ({ ...n })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 1, explanation: { title: "Graph Constructed", body: `Graph with ${n} nodes.` }, properties: [{ label: "Target", value: String(target) }, { label: "Status", value: "Searching" }] });
 
     // BFS
     const adj: Record<number, number[]> = {};
@@ -1060,7 +1063,7 @@ export default function SearchStudioPage() {
     }
 
     logs.push({ message: `Target ${target} not found in the graph.`, type: "error" });
-    steps.push({ nodes: nodes.map(n => ({ ...n, muted: true })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 4, explanation: { title: "Complete", body: `Target ${target} not found.` }, properties: [{ label: "Target", value: target }, { label: "Status", value: "Not Found" }] });
+    steps.push({ nodes: nodes.map(n => ({ ...n, muted: true })), edges: edges.map(e => ({ ...e })), logs: [...logs], highlightedCodeLine: 4, explanation: { title: "Complete", body: `Target ${target} not found.` }, properties: [{ label: "Target", value: String(target) }, { label: "Status", value: "Not Found" }] });
 
     return steps;
   };
